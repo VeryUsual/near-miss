@@ -10,5 +10,16 @@ position = Vector2(0, -2)
 polygon = PackedVector2Array(0, -13, 12, 13, -12, 13)
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=950445727]
+color = Color(1.353256, 1.353256, 1.353256, 1)
 polygon = PackedVector2Array(0, -15, 12, 11, -12, 11)
 uv = PackedVector2Array(-114.900024, -20.199997, -83, 27.100006, -142.40002, 30.40001)
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=183749063]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hitbox" unique_id=733636543]
+position = Vector2(0, -2)
+polygon = PackedVector2Array(0, -15, 13.5, 13.5, -13.5, 13.5)
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

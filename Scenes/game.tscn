@@ -3,13 +3,80 @@
 [ext_resource type="PackedScene" uid="uid://g72uw88kb7xj" path="res://Scenes/player.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://bkxsc1jailcmc" path="res://Scripts/game.gd" id="1_wrm1d"]
 [ext_resource type="PackedScene" uid="uid://bvgg3xq8yl4yb" path="res://Scenes/Enemy.tscn" id="2_qxrlw"]
+[ext_resource type="FontFile" uid="uid://dyn4sgxgayjhq" path="res://Assets/Fonts/Kenney Future Narrow.ttf" id="4_3dryh"]
+
+[sub_resource type="Environment" id="Environment_wrm1d"]
+background_mode = 3
+tonemap_mode = 3
+tonemap_exposure = 1.2
+tonemap_white = 16.0
+glow_enabled = true
+glow_levels/1 = 0.4
+glow_levels/2 = 0.4
+glow_levels/5 = 0.4
+glow_intensity = 1.1
+glow_strength = 0.5
+glow_bloom = 0.5
+glow_blend_mode = 0
+glow_hdr_threshold = 0.1
+glow_hdr_scale = 4.0
+glow_hdr_luminance_cap = 2.0
+fog_enabled = true
+adjustment_enabled = true
+adjustment_contrast = 1.25
+adjustment_saturation = 2.0
 
 [node name="Game" type="Node2D" unique_id=1383240924]
 script = ExtResource("1_wrm1d")
 enemy_scene = ExtResource("2_qxrlw")
 
+[node name="ColorRect" type="ColorRect" parent="." unique_id=8538412]
+offset_left = -15281.0
+offset_top = -7442.0
+offset_right = 16529.0
+offset_bottom = 8141.0
+color = Color(0.013317845, 0.077364154, 0.16140252, 1)
+
 [node name="Player" parent="." unique_id=95259061 instance=ExtResource("1_80nbo")]
 position = Vector2(353, 501)
 
-[node name="Enemy" parent="." unique_id=799443628 instance=ExtResource("2_qxrlw")]
-position = Vector2(1067, 95)
+[node name="EnemySpawnPositions" type="Node" parent="." unique_id=2119385771]
+
+[node name="Node2D" type="Node2D" parent="EnemySpawnPositions" unique_id=33171576]
+position = Vector2(13, 11)
+
+[node name="Node2D2" type="Node2D" parent="EnemySpawnPositions" unique_id=1921240902]
+position = Vector2(1133, 17)
+
+[node name="Node2D3" type="Node2D" parent="EnemySpawnPositions" unique_id=647160790]
+position = Vector2(1141, 638)
+
+[node name="Node2D4" type="Node2D" parent="EnemySpawnPositions" unique_id=126556998]
+position = Vector2(7, 641)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=156990175]
+position = Vector2(576, 324)
+zoom = Vector2(0.9, 0.9)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1800804246]
+environment = SubResource("Environment_wrm1d")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=17666568]
+
+[node name="Countdown" type="Label" parent="CanvasLayer" unique_id=613415709]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_3dryh")
+theme_override_font_sizes/font_size = 150
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
