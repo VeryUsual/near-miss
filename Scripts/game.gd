@@ -11,7 +11,12 @@ var game_started = false
 
 func _ready() -> void:
 	spawn_timer = Timer.new()
-	spawn_timer.wait_time = 0.5
+	if Globals.difficulty == "GOD":
+		spawn_timer.wait_time = 0.1
+	elif Globals.difficulty == "Hard":
+		spawn_timer.wait_time = 0.4
+	else:
+		spawn_timer.wait_time = 0.6
 	spawn_timer.one_shot = false
 	spawn_timer.autostart = true
 	add_child(spawn_timer)

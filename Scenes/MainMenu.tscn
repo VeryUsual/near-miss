@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://ejgshci4pyg8"]
+
+[ext_resource type="Script" uid="uid://xtw4a12twvyn" path="res://Scripts/main_menu.gd" id="1_tt5f1"]
+
+[node name="MainMenu" type="Control" unique_id=791432127]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tt5f1")
+
+[node name="OptionButton" type="OptionButton" parent="." unique_id=1786536150]
+layout_mode = 0
+offset_left = 585.0
+offset_top = 329.0
+offset_right = 782.0
+offset_bottom = 392.0
+item_count = 4
+popup/item_0/text = "Easy"
+popup/item_0/id = 1
+popup/item_1/text = "Medium"
+popup/item_1/id = 2
+popup/item_2/text = "Hard"
+popup/item_2/id = 3
+popup/item_3/text = "GOD"
+popup/item_3/id = 0
+
+[node name="Label" type="Label" parent="." unique_id=1241640512]
+layout_mode = 0
+offset_left = 333.0
+offset_top = 334.0
+offset_right = 497.0
+offset_bottom = 389.0
+text = "select difficulty"
+
+[node name="Label2" type="Label" parent="." unique_id=1677850139]
+layout_mode = 0
+offset_left = 382.0
+offset_top = 169.0
+offset_right = 731.0
+offset_bottom = 266.0
+theme_override_font_sizes/font_size = 60
+text = "NEAR MISS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="." unique_id=1374657613]
+layout_mode = 0
+offset_left = 322.0
+offset_top = 217.0
+offset_right = 806.0
+offset_bottom = 314.0
+theme_override_font_sizes/font_size = 30
+text = "WIP MAIN MENU"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="." unique_id=515707905]
+layout_mode = 0
+offset_left = 464.0
+offset_top = 464.0
+offset_right = 628.0
+offset_bottom = 488.0
+text = "PLAY"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

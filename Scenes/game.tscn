@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bkxsc1jailcmc" path="res://Scripts/game.gd" id="1_wrm1d"]
 [ext_resource type="PackedScene" uid="uid://bvgg3xq8yl4yb" path="res://Scenes/Enemy.tscn" id="2_qxrlw"]
 [ext_resource type="FontFile" uid="uid://dyn4sgxgayjhq" path="res://Assets/Fonts/Kenney Future Narrow.ttf" id="4_3dryh"]
+[ext_resource type="Script" uid="uid://cw6wa0n2qcaaf" path="res://Scripts/camera_2d.gd" id="4_wowpa"]
 
 [sub_resource type="Environment" id="Environment_wrm1d"]
 background_mode = 3
@@ -25,6 +26,12 @@ fog_enabled = true
 adjustment_enabled = true
 adjustment_contrast = 1.25
 adjustment_saturation = 2.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3dryh"]
+size = Vector2(1332, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wowpa"]
+size = Vector2(21, 748.5)
 
 [node name="Game" type="Node2D" unique_id=1383240924]
 script = ExtResource("1_wrm1d")
@@ -57,6 +64,7 @@ position = Vector2(7, 641)
 [node name="Camera2D" type="Camera2D" parent="." unique_id=156990175]
 position = Vector2(576, 324)
 zoom = Vector2(0.9, 0.9)
+script = ExtResource("4_wowpa")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1800804246]
 environment = SubResource("Environment_wrm1d")
@@ -80,3 +88,37 @@ theme_override_font_sizes/font_size = 150
 text = "3"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ShiftingEnergyBar" type="ProgressBar" parent="CanvasLayer" unique_id=1520440956]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -94.0
+offset_top = -36.0
+offset_right = 94.0
+offset_bottom = -27.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/outline_size = 0
+value = 50.0
+show_percentage = false
+
+[node name="Boundaries" type="StaticBody2D" parent="." unique_id=1093361642]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries" unique_id=342298608]
+position = Vector2(585, -46.5)
+shape = SubResource("RectangleShape2D_3dryh")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Boundaries" unique_id=1131438084]
+position = Vector2(581, 695)
+shape = SubResource("RectangleShape2D_3dryh")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Boundaries" unique_id=551116732]
+position = Vector2(-74, 322.5)
+shape = SubResource("RectangleShape2D_wowpa")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Boundaries" unique_id=1341589581]
+position = Vector2(1226.5, 322.25)
+shape = SubResource("RectangleShape2D_wowpa")
