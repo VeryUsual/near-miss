@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://c8jtbpsr0gucp"]
+
+[ext_resource type="PackedScene" uid="uid://g72uw88kb7xj" path="res://Scenes/player.tscn" id="1_80nbo"]
+[ext_resource type="Script" uid="uid://bkxsc1jailcmc" path="res://Scripts/game.gd" id="1_wrm1d"]
+[ext_resource type="PackedScene" uid="uid://bvgg3xq8yl4yb" path="res://Scenes/Enemy.tscn" id="2_qxrlw"]
+
+[node name="Game" type="Node2D" unique_id=1383240924]
+script = ExtResource("1_wrm1d")
+enemy_scene = ExtResource("2_qxrlw")
+
+[node name="Player" parent="." unique_id=95259061 instance=ExtResource("1_80nbo")]
+position = Vector2(353, 501)
+
+[node name="Enemy" parent="." unique_id=799443628 instance=ExtResource("2_qxrlw")]
+position = Vector2(1067, 95)
