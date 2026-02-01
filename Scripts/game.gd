@@ -9,6 +9,8 @@ var countdowntext_index := 0
 
 var game_started = false
 
+var current_normal_timescale = 1.0
+
 func _ready() -> void:
 	spawn_timer = Timer.new()
 	if Globals.difficulty == "GOD":
@@ -54,3 +56,29 @@ func _next_number():
 	countdowntext_tween.tween_property($CanvasLayer/Countdown, "scale", Vector2.ONE, 0.3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 	countdowntext_tween.tween_interval(0.1)
 	countdowntext_tween.tween_callback(Callable(self, "_next_number"))
+
+func _input(event: InputEvent) -> void:
+	if Input.is_action_pressed("open_deck"):
+		$CanvasLayer/CardDeck.visible = true
+		Engine.time_scale = 0.25
+	else:
+		$CanvasLayer/CardDeck.visible = false
+		Engine.time_scale = current_normal_timescale
+
+func _on_card_1_area_2d_mouse_entered() -> void:
+	var cardopentween = get_tree().create_tween()
+	cardopentween.tween_property($CanvasLayer/CardDeck/Card1Area2D, "position", Vector2(0, -130), 0.1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+
+func _on_card_1_area_2d_mouse_exited() -> void:
+	var cardclosetween = get_tree().create_tween()
+	cardclosetween.tween_property($CanvasLayer/CardDeck/Card1Area2D, "position", Vector2.ZERO, 0.06).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+
+func _on_card_1_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			$CanvasLayer/CardDeck.visible = false
+			current_normal_timescale = 0.5
+			Engine.time_scale = current_normal_timescale
+			await get_tree().create_timer(2.5).timeout
+			current_normal_timescale = 1.0
+			Engine.time_scale = current_normal_timescale

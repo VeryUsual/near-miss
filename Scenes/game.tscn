@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bvgg3xq8yl4yb" path="res://Scenes/Enemy.tscn" id="2_qxrlw"]
 [ext_resource type="FontFile" uid="uid://dyn4sgxgayjhq" path="res://Assets/Fonts/Kenney Future Narrow.ttf" id="4_3dryh"]
 [ext_resource type="Script" uid="uid://cw6wa0n2qcaaf" path="res://Scripts/camera_2d.gd" id="4_wowpa"]
+[ext_resource type="Texture2D" uid="uid://dbb64y4rlr4yk" path="res://Assets/Images/SlowmoCard.png" id="6_i6g32"]
 
 [sub_resource type="Environment" id="Environment_wrm1d"]
 background_mode = 3
@@ -26,6 +27,9 @@ fog_enabled = true
 adjustment_enabled = true
 adjustment_contrast = 1.25
 adjustment_saturation = 2.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i6g32"]
+size = Vector2(134, 194)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3dryh"]
 size = Vector2(1332, 21)
@@ -105,6 +109,30 @@ theme_override_constants/outline_size = 0
 value = 50.0
 show_percentage = false
 
+[node name="CardDeck" type="Control" parent="CanvasLayer" unique_id=1070637645]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 198.0
+offset_top = -119.0
+offset_right = -198.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+
+[node name="Card1Area2D" type="Area2D" parent="CanvasLayer/CardDeck" unique_id=732448633]
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/CardDeck/Card1Area2D" unique_id=312633937]
+position = Vector2(70, 148)
+texture = ExtResource("6_i6g32")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/CardDeck/Card1Area2D" unique_id=1429022984]
+position = Vector2(70, 148)
+shape = SubResource("RectangleShape2D_i6g32")
+
 [node name="Boundaries" type="StaticBody2D" parent="." unique_id=1093361642]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries" unique_id=342298608]
@@ -122,3 +150,7 @@ shape = SubResource("RectangleShape2D_wowpa")
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Boundaries" unique_id=1341589581]
 position = Vector2(1226.5, 322.25)
 shape = SubResource("RectangleShape2D_wowpa")
+
+[connection signal="input_event" from="CanvasLayer/CardDeck/Card1Area2D" to="." method="_on_card_1_area_2d_input_event"]
+[connection signal="mouse_entered" from="CanvasLayer/CardDeck/Card1Area2D" to="." method="_on_card_1_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/CardDeck/Card1Area2D" to="." method="_on_card_1_area_2d_mouse_exited"]

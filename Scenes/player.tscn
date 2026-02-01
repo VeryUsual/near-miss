@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" uid="uid://ciw2m4f3ah6g4" path="res://Scripts/player.gd" id="1_v0iea"]
 
-[node name="Player" type="CharacterBody2D" unique_id=95259061]
+[node name="Player" type="CharacterBody2D" unique_id=95259061 groups=["Player"]]
+collision_layer = 5
 script = ExtResource("1_v0iea")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1804517389]

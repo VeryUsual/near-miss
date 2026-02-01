@@ -14,3 +14,7 @@ polygon = PackedVector2Array(0, -13, 12, 13, -12, 13)
 color = Color(1.0045669, 0.6389484, 0.34811532, 1)
 polygon = PackedVector2Array(0, -15, 12, 11, -12, 11)
 uv = PackedVector2Array(-114.900024, -20.199997, -83, 27.100006, -142.40002, 30.40001)
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=34821870]
+target_position = Vector2(0, 179)
+collision_mask = 4
