@@ -13,7 +13,20 @@ var current_normal_timescale = 1.0
 
 var enabled_cards = ["slowmo", "clean"]
 
+var environment
+
+var game_duration := 0.0
+
+var saturation_value: float = 1.0:
+	set(value):
+		saturation_value = value
+		if environment:
+			environment.adjustment_enabled = true
+			environment.adjustment_saturation = value
+
 func _ready() -> void:
+	environment = $WorldEnvironment.environment
+	
 	$CanvasLayer/CardDeck.visible = false
 	
 	$CanvasLayer/FadeTransition/AnimationPlayer.play("fade_out")
@@ -65,6 +78,10 @@ func _next_number():
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_pressed("open_deck"):
+		if $CanvasLayer/CardDeck.visible == false:
+			var saturationtween = get_tree().create_tween()
+			saturation_value = 2.0
+			saturationtween.tween_property(self, "saturation_value", 0.1, 0.2)
 		if "slowmo" in enabled_cards:
 			$CanvasLayer/CardDeck/Card1Area2D/Sprite2D.modulate = Color(1.0, 1.0, 1.0)
 		else:
@@ -76,6 +93,10 @@ func _input(event: InputEvent) -> void:
 		$CanvasLayer/CardDeck.visible = true
 		Engine.time_scale = 0.25
 	else:
+		if $CanvasLayer/CardDeck.visible == true:
+			var saturationtween = get_tree().create_tween()
+			saturation_value = 0.1
+			saturationtween.tween_property(self, "saturation_value", 2.0, 0.2)
 		$CanvasLayer/CardDeck.visible = false
 		Engine.time_scale = current_normal_timescale
 
@@ -107,6 +128,10 @@ func _on_card_1_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx
 				enabled_cards.append("slowmo")
 
 func _process(delta: float) -> void:
+	if game_started:
+		game_duration += delta
+		$CanvasLayer/GameDurationLabel.text = str(snapped(game_duration, 0.01))
+	
 	if $CanvasLayer/CardDeck/Card1Area2D/Card1CooldownTimer.time_left != 0:
 		$CanvasLayer/CardDeck/Card1Area2D/Card1CooldownTimerLabel.visible = true
 		$CanvasLayer/CardDeck/Card1Area2D/Card1CooldownTimerLabel.text = str(int($CanvasLayer/CardDeck/Card1Area2D/Card1CooldownTimer.time_left))

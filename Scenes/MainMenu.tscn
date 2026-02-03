@@ -87,6 +87,25 @@ theme = ExtResource("2_853f1")
 theme_override_font_sizes/font_size = 30
 text = "PLAY"
 
+[node name="Label" type="Label" parent="." unique_id=580103022]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -187.0
+offset_top = -163.0
+offset_right = -19.0
+offset_bottom = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Controls:
+
+WASD to move
+F to open card deck
+Shift to sprint"
+
 [node name="FadeTransition" parent="." unique_id=758593637 instance=ExtResource("3_8saeu")]
 visible = false
 layout_mode = 1

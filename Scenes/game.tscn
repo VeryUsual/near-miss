@@ -79,6 +79,14 @@ environment = SubResource("Environment_wrm1d")
 
 [node name="FadeTransition" parent="CanvasLayer" unique_id=758593637 instance=ExtResource("8_v158k")]
 
+[node name="GameDurationLabel" type="Label" parent="CanvasLayer" unique_id=335810291]
+offset_left = 13.0
+offset_top = 12.0
+offset_right = 141.0
+offset_bottom = 67.0
+theme_override_font_sizes/font_size = 40
+text = "0.00"
+
 [node name="Countdown" type="Label" parent="CanvasLayer" unique_id=613415709]
 anchors_preset = 8
 anchor_left = 0.5

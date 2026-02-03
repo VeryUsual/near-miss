@@ -30,5 +30,6 @@ func _process(delta: float) -> void:
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	get_parent().get_node("Camera2D").add_trauma(0.5)
+	Globals.last_game_duration = get_tree().current_scene.game_duration
 	await get_tree().create_timer(0.1).timeout
 	get_tree().change_scene_to_file("res://Scenes/GameOver.tscn")

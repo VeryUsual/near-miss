@@ -23,4 +23,18 @@ collision_mask = 2
 position = Vector2(0, -2)
 polygon = PackedVector2Array(0, -15, 13.5, 13.5, -13.5, 13.5)
 
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=887816264]
+amount = 175
+lifetime = 0.35000000000000003
+preprocess = 0.5
+randomness = 0.2
+emission_shape = 6
+emission_ring_inner_radius = 0.8
+emission_ring_radius = 1.0
+spread = 119.53
+gravity = Vector2(0, 5)
+color = Color(18.892157, 15.581995, 15.018564, 1)
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
