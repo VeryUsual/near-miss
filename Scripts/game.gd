@@ -11,7 +11,13 @@ var game_started = false
 
 var current_normal_timescale = 1.0
 
+var enabled_cards = ["slowmo", "clean"]
+
 func _ready() -> void:
+	$CanvasLayer/CardDeck.visible = false
+	
+	$CanvasLayer/FadeTransition/AnimationPlayer.play("fade_out")
+	
 	spawn_timer = Timer.new()
 	if Globals.difficulty == "GOD":
 		spawn_timer.wait_time = 0.1
@@ -59,6 +65,14 @@ func _next_number():
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_pressed("open_deck"):
+		if "slowmo" in enabled_cards:
+			$CanvasLayer/CardDeck/Card1Area2D/Sprite2D.modulate = Color(1.0, 1.0, 1.0)
+		else:
+			$CanvasLayer/CardDeck/Card1Area2D/Sprite2D.modulate = Color(0.5, 0.5, 0.5)
+		if "clean" in enabled_cards:
+			$CanvasLayer/CardDeck/Card2Area2D/Sprite2D.modulate = Color(1.0, 1.0, 1.0)
+		else:
+			$CanvasLayer/CardDeck/Card2Area2D/Sprite2D.modulate = Color(0.5, 0.5, 0.5)
 		$CanvasLayer/CardDeck.visible = true
 		Engine.time_scale = 0.25
 	else:
@@ -76,9 +90,55 @@ func _on_card_1_area_2d_mouse_exited() -> void:
 func _on_card_1_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			$CanvasLayer/CardDeck.visible = false
-			current_normal_timescale = 0.5
-			Engine.time_scale = current_normal_timescale
-			await get_tree().create_timer(2.5).timeout
-			current_normal_timescale = 1.0
-			Engine.time_scale = current_normal_timescale
+			if "slowmo" in enabled_cards:
+				var cardclosetween = get_tree().create_tween()
+				cardclosetween.tween_property($CanvasLayer/CardDeck/Card1Area2D/Sprite2D, "modulate", Color(0.5, 0.5, 0.5), 0.06).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+				enabled_cards.erase("slowmo")
+				$CanvasLayer/CardDeck.visible = false
+				current_normal_timescale = 0.5
+				Engine.time_scale = current_normal_timescale
+				await get_tree().create_timer(2.5).timeout
+				current_normal_timescale = 1.0
+				Engine.time_scale = current_normal_timescale
+				$CanvasLayer/CardDeck/Card1Area2D/Card1CooldownTimer.start()
+				$CanvasLayer/CardDeck/Card1Area2D/Card1CooldownTimerLabel.visible = true
+				$CanvasLayer/CardDeck/Card1Area2D/Card1CooldownTimerLabel.text = "15"
+				await $CanvasLayer/CardDeck/Card1Area2D/Card1CooldownTimer.timeout  # card use cooldown also
+				enabled_cards.append("slowmo")
+
+func _process(delta: float) -> void:
+	if $CanvasLayer/CardDeck/Card1Area2D/Card1CooldownTimer.time_left != 0:
+		$CanvasLayer/CardDeck/Card1Area2D/Card1CooldownTimerLabel.visible = true
+		$CanvasLayer/CardDeck/Card1Area2D/Card1CooldownTimerLabel.text = str(int($CanvasLayer/CardDeck/Card1Area2D/Card1CooldownTimer.time_left))
+	else:
+		$CanvasLayer/CardDeck/Card1Area2D/Card1CooldownTimerLabel.visible = false
+	if $CanvasLayer/CardDeck/Card2Area2D/Card2CooldownTimer.time_left != 0:
+		$CanvasLayer/CardDeck/Card2Area2D/Card2CooldownTimerLabel.visible = true
+		$CanvasLayer/CardDeck/Card2Area2D/Card2CooldownTimerLabel.text = str(int($CanvasLayer/CardDeck/Card2Area2D/Card2CooldownTimer.time_left))
+	else:
+		$CanvasLayer/CardDeck/Card2Area2D/Card2CooldownTimerLabel.visible = false
+
+func _on_card_2_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if "clean" in enabled_cards:
+				var cardclosetween = get_tree().create_tween()
+				cardclosetween.tween_property($CanvasLayer/CardDeck/Card2Area2D/Sprite2D, "modulate", Color(0.5, 0.5, 0.5), 0.06).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+				enabled_cards.erase("clean")
+				$CanvasLayer/CardDeck.visible = false
+				var enemies := get_tree().get_nodes_in_group("Enemy")
+				for enemy in enemies:
+					enemy.queue_free()
+				$CanvasLayer/CardDeck/Card2Area2D/Card2CooldownTimer.start()
+				$CanvasLayer/CardDeck/Card2Area2D/Card2CooldownTimerLabel.visible = true
+				$CanvasLayer/CardDeck/Card2Area2D/Card2CooldownTimerLabel.text = "50"
+				await $CanvasLayer/CardDeck/Card2Area2D/Card2CooldownTimer.timeout  # card use cooldown also
+				enabled_cards.append("clean")
+
+func _on_card_2_area_2d_mouse_entered() -> void:
+	var cardopentween = get_tree().create_tween()
+	cardopentween.tween_property($CanvasLayer/CardDeck/Card2Area2D, "position", Vector2(162, -130), 0.1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+
+func _on_card_2_area_2d_mouse_exited() -> void:
+	var cardclosetween = get_tree().create_tween()
+	cardclosetween.tween_property($CanvasLayer/CardDeck/Card2Area2D, "position", Vector2(162, 0), 0.06).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)

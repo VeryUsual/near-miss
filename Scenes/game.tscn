@@ -6,6 +6,8 @@
 [ext_resource type="FontFile" uid="uid://dyn4sgxgayjhq" path="res://Assets/Fonts/Kenney Future Narrow.ttf" id="4_3dryh"]
 [ext_resource type="Script" uid="uid://cw6wa0n2qcaaf" path="res://Scripts/camera_2d.gd" id="4_wowpa"]
 [ext_resource type="Texture2D" uid="uid://dbb64y4rlr4yk" path="res://Assets/Images/SlowmoCard.png" id="6_i6g32"]
+[ext_resource type="Texture2D" uid="uid://dkgrsn4nkhebg" path="res://Assets/Images/CleanCard.png" id="7_1l0tm"]
+[ext_resource type="PackedScene" uid="uid://c4w65u4ii1rdu" path="res://Scenes/fadetransition.tscn" id="8_v158k"]
 
 [sub_resource type="Environment" id="Environment_wrm1d"]
 background_mode = 3
@@ -18,13 +20,13 @@ glow_levels/2 = 0.4
 glow_levels/5 = 0.4
 glow_intensity = 1.1
 glow_strength = 0.5
-glow_bloom = 0.5
+glow_bloom = 0.7
 glow_blend_mode = 0
 glow_hdr_threshold = 0.1
 glow_hdr_scale = 4.0
 glow_hdr_luminance_cap = 2.0
-fog_enabled = true
 adjustment_enabled = true
+adjustment_brightness = 1.5
 adjustment_contrast = 1.25
 adjustment_saturation = 2.0
 
@@ -74,6 +76,8 @@ script = ExtResource("4_wowpa")
 environment = SubResource("Environment_wrm1d")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=17666568]
+
+[node name="FadeTransition" parent="CanvasLayer" unique_id=758593637 instance=ExtResource("8_v158k")]
 
 [node name="Countdown" type="Label" parent="CanvasLayer" unique_id=613415709]
 anchors_preset = 8
@@ -133,6 +137,45 @@ texture = ExtResource("6_i6g32")
 position = Vector2(70, 148)
 shape = SubResource("RectangleShape2D_i6g32")
 
+[node name="Card1CooldownTimer" type="Timer" parent="CanvasLayer/CardDeck/Card1Area2D" unique_id=1641790290]
+wait_time = 15.0
+one_shot = true
+
+[node name="Card1CooldownTimerLabel" type="Label" parent="CanvasLayer/CardDeck/Card1Area2D" unique_id=770174652]
+offset_left = 7.0
+offset_top = -5.0
+offset_right = 148.0
+offset_bottom = 64.0
+theme_override_fonts/font = ExtResource("4_3dryh")
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Card2Area2D" type="Area2D" parent="CanvasLayer/CardDeck" unique_id=369792490]
+position = Vector2(162, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/CardDeck/Card2Area2D" unique_id=1846138492]
+position = Vector2(70, 148)
+texture = ExtResource("7_1l0tm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/CardDeck/Card2Area2D" unique_id=539545259]
+position = Vector2(70, 148)
+shape = SubResource("RectangleShape2D_i6g32")
+
+[node name="Card2CooldownTimer" type="Timer" parent="CanvasLayer/CardDeck/Card2Area2D" unique_id=1693332982]
+wait_time = 50.0
+one_shot = true
+
+[node name="Card2CooldownTimerLabel" type="Label" parent="CanvasLayer/CardDeck/Card2Area2D" unique_id=1330159717]
+offset_left = 7.0
+offset_top = -5.0
+offset_right = 148.0
+offset_bottom = 64.0
+theme_override_fonts/font = ExtResource("4_3dryh")
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Boundaries" type="StaticBody2D" parent="." unique_id=1093361642]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries" unique_id=342298608]
@@ -154,3 +197,6 @@ shape = SubResource("RectangleShape2D_wowpa")
 [connection signal="input_event" from="CanvasLayer/CardDeck/Card1Area2D" to="." method="_on_card_1_area_2d_input_event"]
 [connection signal="mouse_entered" from="CanvasLayer/CardDeck/Card1Area2D" to="." method="_on_card_1_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/CardDeck/Card1Area2D" to="." method="_on_card_1_area_2d_mouse_exited"]
+[connection signal="input_event" from="CanvasLayer/CardDeck/Card2Area2D" to="." method="_on_card_2_area_2d_input_event"]
+[connection signal="mouse_entered" from="CanvasLayer/CardDeck/Card2Area2D" to="." method="_on_card_2_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/CardDeck/Card2Area2D" to="." method="_on_card_2_area_2d_mouse_exited"]

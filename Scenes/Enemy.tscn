@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b8uw6627r66s4" path="res://Scripts/enemy.gd" id="1_m1htj"]
 
-[node name="Enemy" type="CharacterBody2D" unique_id=799443628]
+[node name="Enemy" type="CharacterBody2D" unique_id=799443628 groups=["Enemy"]]
 collision_layer = 3
 script = ExtResource("1_m1htj")
 
