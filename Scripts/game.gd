@@ -11,7 +11,7 @@ var game_started = false
 
 var current_normal_timescale = 1.0
 
-var enabled_cards = ["slowmo", "clean"]
+var enabled_cards = ["slowmo", "clean", "speed"]
 
 var environment
 
@@ -142,6 +142,11 @@ func _process(delta: float) -> void:
 		$CanvasLayer/CardDeck/Card2Area2D/Card2CooldownTimerLabel.text = str(int($CanvasLayer/CardDeck/Card2Area2D/Card2CooldownTimer.time_left))
 	else:
 		$CanvasLayer/CardDeck/Card2Area2D/Card2CooldownTimerLabel.visible = false
+	if $CanvasLayer/CardDeck/Card3Area2D/Card3CooldownTimer.time_left != 0:
+		$CanvasLayer/CardDeck/Card3Area2D/Card3CooldownTimerLabel.visible = true
+		$CanvasLayer/CardDeck/Card3Area2D/Card3CooldownTimerLabel.text = str(int($CanvasLayer/CardDeck/Card3Area2D/Card3CooldownTimer.time_left))
+	else:
+		$CanvasLayer/CardDeck/Card3Area2D/Card3CooldownTimerLabel.visible = false
 
 func _on_card_2_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
@@ -167,3 +172,29 @@ func _on_card_2_area_2d_mouse_entered() -> void:
 func _on_card_2_area_2d_mouse_exited() -> void:
 	var cardclosetween = get_tree().create_tween()
 	cardclosetween.tween_property($CanvasLayer/CardDeck/Card2Area2D, "position", Vector2(162, 0), 0.06).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+
+
+func _on_card_3_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if "speed" in enabled_cards:
+				var cardclosetween = get_tree().create_tween()
+				cardclosetween.tween_property($CanvasLayer/CardDeck/Card3Area2D/Sprite2D, "modulate", Color(0.5, 0.5, 0.5), 0.06).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+				enabled_cards.erase("speed")
+				$CanvasLayer/CardDeck.visible = false
+				$Player.speed = 1100
+				await get_tree().create_timer(2.5).timeout
+				$Player.speed = 500
+				$CanvasLayer/CardDeck/Card3Area2D/Card3CooldownTimer.start()
+				$CanvasLayer/CardDeck/Card3Area2D/Card3CooldownTimerLabel.visible = true
+				$CanvasLayer/CardDeck/Card3Area2D/Card3CooldownTimerLabel.text = "50"
+				await $CanvasLayer/CardDeck/Card3Area2D/Card3CooldownTimer.timeout
+				enabled_cards.append("speed")
+
+func _on_card_3_area_2d_mouse_entered() -> void:
+	var cardopentween = get_tree().create_tween()
+	cardopentween.tween_property($CanvasLayer/CardDeck/Card3Area2D, "position", Vector2(325, -130), 0.1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+
+func _on_card_3_area_2d_mouse_exited() -> void:
+	var cardclosetween = get_tree().create_tween()
+	cardclosetween.tween_property($CanvasLayer/CardDeck/Card3Area2D, "position", Vector2(325, 0), 0.06).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)

@@ -3,8 +3,10 @@ extends CharacterBody2D
 var speed = 500
 var shiftingenergy = 100
 
+var gameover = false
+
 func _physics_process(delta):
-	if get_tree().current_scene.get_node("CanvasLayer/CardDeck").visible == false:
+	if get_tree().current_scene.get_node("CanvasLayer/CardDeck").visible == false and gameover == false:
 		var direction = Input.get_vector("left", "right", "up", "down")
 		var shifting = false
 		
@@ -29,7 +31,28 @@ func _process(delta: float) -> void:
 		get_parent().get_node("CanvasLayer/ShiftingEnergyBar").visible = true
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
+	get_tree().current_scene.get_node("ExplosionSFXAudioPlayer").play()
 	get_parent().get_node("Camera2D").add_trauma(0.5)
 	Globals.last_game_duration = get_tree().current_scene.game_duration
-	await get_tree().create_timer(0.1).timeout
+	
+	get_tree().current_scene.get_node("CanvasLayer/GameDurationLabel").visible = false
+	
+	var saturationtween = get_tree().create_tween()
+	get_tree().current_scene.saturation_value = 2.0
+	saturationtween.tween_property(get_tree().current_scene, "saturation_value", 0.01, 0.3)
+	
+	var enemies := get_tree().get_nodes_in_group("Enemy")
+	for enemy in enemies:
+		enemy.queue_free()
+		
+	get_tree().current_scene.get_node("CanvasLayer/FadeTransition/AnimationPlayer").play("fade_in")
+	
+	gameover = true
+	get_tree().current_scene.get_node("CanvasLayer/CardDeck").visible = false
+	get_tree().current_scene.get_node("CanvasLayer/CardDeck").modulate = Color(0, 0, 0, 0) # a weird trick to force the carddeck to be not visible during this period
+	
+	await get_tree().create_timer(0.9).timeout
+	
+	Engine.time_scale = 1.0
+	
 	get_tree().change_scene_to_file("res://Scenes/GameOver.tscn")

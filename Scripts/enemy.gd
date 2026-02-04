@@ -32,4 +32,6 @@ func _physics_process(delta: float) -> void:
 		if hit == player:
 			Engine.time_scale = 0.8
 			await get_tree().create_timer(0.4).timeout
-			Engine.time_scale = get_tree().current_scene.current_normal_timescale
+			if get_tree().current_scene: # race condition prevention stuffs
+				if get_tree().current_scene.current_normal_timescale:
+					Engine.time_scale = get_tree().current_scene.current_normal_timescale

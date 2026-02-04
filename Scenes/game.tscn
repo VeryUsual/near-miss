@@ -8,6 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://dbb64y4rlr4yk" path="res://Assets/Images/SlowmoCard.png" id="6_i6g32"]
 [ext_resource type="Texture2D" uid="uid://dkgrsn4nkhebg" path="res://Assets/Images/CleanCard.png" id="7_1l0tm"]
 [ext_resource type="PackedScene" uid="uid://c4w65u4ii1rdu" path="res://Scenes/fadetransition.tscn" id="8_v158k"]
+[ext_resource type="AudioStream" uid="uid://c0m8wbgppw8pc" path="res://Assets/Music/background.mp3" id="9_h4fw4"]
+[ext_resource type="Texture2D" uid="uid://dkp0e48p2p4hm" path="res://Assets/Images/SpeedCard.png" id="9_o5yvi"]
+[ext_resource type="AudioStream" uid="uid://bpdflnh3kue6u" path="res://Assets/Music/explosion.mp3" id="10_ldgsr"]
 
 [sub_resource type="Environment" id="Environment_wrm1d"]
 background_mode = 3
@@ -184,6 +187,31 @@ theme_override_font_sizes/font_size = 50
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Card3Area2D" type="Area2D" parent="CanvasLayer/CardDeck" unique_id=350001222]
+position = Vector2(325, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/CardDeck/Card3Area2D" unique_id=1846225630]
+position = Vector2(70, 148)
+texture = ExtResource("9_o5yvi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/CardDeck/Card3Area2D" unique_id=1891131152]
+position = Vector2(70, 148)
+shape = SubResource("RectangleShape2D_i6g32")
+
+[node name="Card3CooldownTimer" type="Timer" parent="CanvasLayer/CardDeck/Card3Area2D" unique_id=1214340786]
+wait_time = 50.0
+one_shot = true
+
+[node name="Card3CooldownTimerLabel" type="Label" parent="CanvasLayer/CardDeck/Card3Area2D" unique_id=1703472294]
+offset_left = 7.0
+offset_top = -5.0
+offset_right = 148.0
+offset_bottom = 64.0
+theme_override_fonts/font = ExtResource("4_3dryh")
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Boundaries" type="StaticBody2D" parent="." unique_id=1093361642]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries" unique_id=342298608]
@@ -202,9 +230,21 @@ shape = SubResource("RectangleShape2D_wowpa")
 position = Vector2(1226.5, 322.25)
 shape = SubResource("RectangleShape2D_wowpa")
 
+[node name="BackgroundMusicAudioPlayer" type="AudioStreamPlayer" parent="." unique_id=43258937]
+stream = ExtResource("9_h4fw4")
+volume_db = -5.0
+autoplay = true
+parameters/looping = true
+
+[node name="ExplosionSFXAudioPlayer" type="AudioStreamPlayer" parent="." unique_id=18353019]
+stream = ExtResource("10_ldgsr")
+
 [connection signal="input_event" from="CanvasLayer/CardDeck/Card1Area2D" to="." method="_on_card_1_area_2d_input_event"]
 [connection signal="mouse_entered" from="CanvasLayer/CardDeck/Card1Area2D" to="." method="_on_card_1_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/CardDeck/Card1Area2D" to="." method="_on_card_1_area_2d_mouse_exited"]
 [connection signal="input_event" from="CanvasLayer/CardDeck/Card2Area2D" to="." method="_on_card_2_area_2d_input_event"]
 [connection signal="mouse_entered" from="CanvasLayer/CardDeck/Card2Area2D" to="." method="_on_card_2_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/CardDeck/Card2Area2D" to="." method="_on_card_2_area_2d_mouse_exited"]
+[connection signal="input_event" from="CanvasLayer/CardDeck/Card3Area2D" to="." method="_on_card_3_area_2d_input_event"]
+[connection signal="mouse_entered" from="CanvasLayer/CardDeck/Card3Area2D" to="." method="_on_card_3_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/CardDeck/Card3Area2D" to="." method="_on_card_3_area_2d_mouse_exited"]

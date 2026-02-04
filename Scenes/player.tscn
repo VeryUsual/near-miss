@@ -2,6 +2,21 @@
 
 [ext_resource type="Script" uid="uid://ciw2m4f3ah6g4" path="res://Scripts/player.gd" id="1_v0iea"]
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v0iea"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.8
+emission_ring_cone_angle = 90.0
+spread = 119.53
+gravity = Vector3(0, 5, 0)
+scale_max = 1.1
+color = Color(18.892157, 15.581995, 15.018564, 1)
+hue_variation_min = -0.5
+hue_variation_max = 1.0
+
 [node name="Player" type="CharacterBody2D" unique_id=95259061 groups=["Player"]]
 collision_layer = 5
 script = ExtResource("1_v0iea")
@@ -23,18 +38,13 @@ collision_mask = 2
 position = Vector2(0, -2)
 polygon = PackedVector2Array(0, -15, 13.5, 13.5, -13.5, 13.5)
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=887816264]
+[node name="CPUParticles2D" type="GPUParticles2D" parent="." unique_id=968983930]
 amount = 175
-lifetime = 0.35000000000000003
+lifetime = 0.4
 preprocess = 0.5
 randomness = 0.2
-emission_shape = 6
-emission_ring_inner_radius = 0.8
-emission_ring_radius = 1.0
-spread = 119.53
-gravity = Vector2(0, 5)
-color = Color(18.892157, 15.581995, 15.018564, 1)
-hue_variation_min = -1.0
-hue_variation_max = 1.0
+fixed_fps = 0
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_v0iea")
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
