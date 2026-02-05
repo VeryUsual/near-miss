@@ -23,6 +23,6 @@ Press F to open your Card Deck. In there, you can activate abilities that help y
 
 Created by me, all art drawn by me, music and sfx from Pixabay, and fonts from Kenney.
 
-Built using the Godot Game Engine.
+Built using the [Godot Game Engine](https://godotengine.org).
 
-Licensed under the GNU General Public License 3.0.
+Licensed under the [GNU General Public License 3.0](https://www.gnu.org/licenses/gpl-3.0.html).
