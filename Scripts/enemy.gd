@@ -15,6 +15,12 @@ func _ready() -> void:
 	elif Globals.difficulty == "GOD":
 		SPEED = 600
 	
+	if get_tree().current_scene.game_duration:
+		if get_tree().current_scene.game_duration >= 60.0:
+			SPEED += 200
+		elif get_tree().current_scene.game_duration >= 30.0:
+			SPEED += 150
+	
 	destination = get_parent().get_node("Player").global_position
 	direction = global_position.direction_to(destination)
 	$RayCast2D.rotation = direction.angle() - PI / 2
