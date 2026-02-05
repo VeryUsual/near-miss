@@ -1,7 +1,7 @@
 # Near Miss
 
 ## Play
-Play the game [here](https://todo.todo/todo) on itch.io.
+Play the game [here](https://pineapplepixel.itch.io/near-miss) on itch.io. The game is available there in the Web (with a few Web-only bugs), on Linux, on MacOS (it's not notorized though so you need to specifically whitelist it), or on Microsoft Windows.
 
 ## Controls
 WASD to Move
