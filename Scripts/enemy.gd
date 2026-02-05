@@ -16,7 +16,9 @@ func _ready() -> void:
 		SPEED = 600
 	
 	if get_tree().current_scene.game_duration:
-		if get_tree().current_scene.game_duration >= 60.0:
+		if get_tree().current_scene.game_duration >= 90.0:
+			SPEED += 300
+		elif get_tree().current_scene.game_duration >= 60.0:
 			SPEED += 200
 		elif get_tree().current_scene.game_duration >= 30.0:
 			SPEED += 150
