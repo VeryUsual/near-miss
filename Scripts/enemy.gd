@@ -9,7 +9,7 @@ var direction
 
 func _ready() -> void:
 	if Globals.difficulty == "Easy":
-		SPEED = 350
+		SPEED = 100
 	elif Globals.difficulty == "Hard":
 		SPEED = 500
 	elif Globals.difficulty == "GOD":

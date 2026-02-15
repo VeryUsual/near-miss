@@ -8,13 +8,8 @@ func _ready() -> void:
 	Engine.time_scale = 1.0
 	$PBLabel.hide()
 	
-	last_game_duration = snapped(Globals.last_game_duration, 0.01)
+	last_game_duration = Globals.wave
 	
-	if Globals.last_game_duration > Globals.personal_best:
-		Globals.personal_best = Globals.last_game_duration
-		$PBLabel.text = "You set a NEW personal best!"
-	else:
-		$PBLabel.text = "Personal Best: " + str(snapped(Globals.personal_best, 0.01)) + " seconds."
 	$PBLabel.show()
 
 func _on_last_game_dur_set(new_value: int) -> void:
@@ -37,4 +32,4 @@ func _on_button_2_pressed() -> void:
 
 func _on_fake_tweened_last_game_duration_set(new_value: int) -> void:
 	fake_tweened_last_game_duration = new_value
-	$Label2.text = "You survived for " + str(snapped(fake_tweened_last_game_duration, 0.01)) + " seconds."
+	$Label2.text = "You survived for " + str(Globals.wave) + " waves."

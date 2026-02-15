@@ -4,6 +4,24 @@ var button_type = null
 
 func _ready() -> void:
 	Engine.time_scale = 1.0
+	
+	var versiontwotween = create_tween()
+	versiontwotween.set_loops()
+	
+	versiontwotween.tween_property(
+		$VersionTwoText,
+		"theme_override_font_sizes/font_size", 21, 0.5
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	
+	versiontwotween.tween_property(
+		$VersionTwoText,
+		"theme_override_font_sizes/font_size", 19, 0.5
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	versiontwotween.tween_property(
+		$VersionTwoText,
+		"theme_override_font_sizes/font_size", 20, 0.5
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
 func _on_button_pressed() -> void:
 	button_type = "play"

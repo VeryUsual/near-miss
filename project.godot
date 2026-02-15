@@ -19,6 +19,11 @@ config/icon="res://icon.svg"
 
 Globals="*uid://dpl1b5t2mrnpe"
 
+[editor]
+
+movie_writer/movie_file="C:\\Users\\ARK\\Documents\\swccodingvideo\\nearmiss.avi"
+movie_writer/fps=100
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")

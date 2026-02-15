@@ -11,7 +11,7 @@ var game_started = false
 
 var current_normal_timescale = 1.0
 
-var enabled_cards = ["slowmo", "clean", "speed"]
+var enabled_cards = Globals.equipped_cards.duplicate()
 
 var environment
 
@@ -28,6 +28,8 @@ func _ready() -> void:
 	environment = $WorldEnvironment.environment
 	
 	$CanvasLayer/CardDeck.visible = false
+	
+	$CanvasLayer/WaveLabel.text = "Wave " + str(Globals.wave)
 	
 	$CanvasLayer/FadeTransition/AnimationPlayer.play("fade_out")
 	
@@ -90,6 +92,20 @@ func _input(event: InputEvent) -> void:
 			$CanvasLayer/CardDeck/Card2Area2D/Sprite2D.modulate = Color(1.0, 1.0, 1.0)
 		else:
 			$CanvasLayer/CardDeck/Card2Area2D/Sprite2D.modulate = Color(0.5, 0.5, 0.5)
+		
+		if "slowmo" in Globals.equipped_cards:
+			$CanvasLayer/CardDeck/Card1Area2D/Sprite2D.modulate = Color(1.0, 1.0, 1.0, 1.0)
+		else:
+			$CanvasLayer/CardDeck/Card1Area2D/Sprite2D.modulate = Color(0.0, 0.0, 0.0, 0.0)
+		if "clean" in Globals.equipped_cards:
+			$CanvasLayer/CardDeck/Card2Area2D/Sprite2D.modulate = Color(1.0, 1.0, 1.0, 1.0)
+		else:
+			$CanvasLayer/CardDeck/Card2Area2D/Sprite2D.modulate = Color(0.0, 0.0, 0.0, 0.0)
+		if "speed" in Globals.equipped_cards:
+			$CanvasLayer/CardDeck/Card3Area2D/Sprite2D.modulate = Color(1.0, 1.0, 1.0, 1.0)
+		else:
+			$CanvasLayer/CardDeck/Card3Area2D/Sprite2D.modulate = Color(0.0, 0.0, 0.0, 0.0)
+		
 		$CanvasLayer/CardDeck.visible = true
 		Engine.time_scale = 0.25
 	else:
@@ -111,7 +127,7 @@ func _on_card_1_area_2d_mouse_exited() -> void:
 func _on_card_1_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			if "slowmo" in enabled_cards:
+			if "slowmo" in enabled_cards and "slowmo" in Globals.equipped_cards:
 				var cardclosetween = get_tree().create_tween()
 				cardclosetween.tween_property($CanvasLayer/CardDeck/Card1Area2D/Sprite2D, "modulate", Color(0.5, 0.5, 0.5), 0.06).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
 				enabled_cards.erase("slowmo")
@@ -130,7 +146,14 @@ func _on_card_1_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx
 func _process(delta: float) -> void:
 	if game_started:
 		game_duration += delta
-		$CanvasLayer/GameDurationLabel.text = str(snapped(game_duration, 0.01))
+		if (Globals.wave_durations[Globals.wave-1] - snapped(game_duration, 0.1) <= 0):
+			$CanvasLayer/WaveCompleted.show()
+			await get_tree().create_timer(0.5).timeout
+			get_tree().change_scene_to_file("res://Scenes/wavecompleted.tscn")
+		var gamedurlabeltext = str(Globals.wave_durations[Globals.wave-1] - snapped(game_duration, 0.1))
+		if len(gamedurlabeltext.split(".")[1]) == 0:
+			gamedurlabeltext = gamedurlabeltext + "0"
+		$CanvasLayer/GameDurationLabel.text = gamedurlabeltext
 	
 	if $CanvasLayer/CardDeck/Card1Area2D/Card1CooldownTimer.time_left != 0:
 		$CanvasLayer/CardDeck/Card1Area2D/Card1CooldownTimerLabel.visible = true
@@ -151,7 +174,7 @@ func _process(delta: float) -> void:
 func _on_card_2_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			if "clean" in enabled_cards:
+			if "clean" in enabled_cards and "clean" in Globals.equipped_cards:
 				var cardclosetween = get_tree().create_tween()
 				cardclosetween.tween_property($CanvasLayer/CardDeck/Card2Area2D/Sprite2D, "modulate", Color(0.5, 0.5, 0.5), 0.06).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
 				enabled_cards.erase("clean")
@@ -177,7 +200,7 @@ func _on_card_2_area_2d_mouse_exited() -> void:
 func _on_card_3_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			if "speed" in enabled_cards:
+			if "speed" in enabled_cards and "speed" in Globals.equipped_cards:
 				var cardclosetween = get_tree().create_tween()
 				cardclosetween.tween_property($CanvasLayer/CardDeck/Card3Area2D/Sprite2D, "modulate", Color(0.5, 0.5, 0.5), 0.06).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
 				enabled_cards.erase("speed")

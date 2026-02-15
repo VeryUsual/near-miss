@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://5qglx3f4vhrj"]
+
+[ext_resource type="Script" uid="uid://c2viyernkx7ju" path="res://Scripts/wavecompleted.gd" id="1_xrutj"]
+
+[node name="WaveCompleted" type="Control" unique_id=242989467]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xrutj")
+
+[node name="AbilityButton1" type="Button" parent="." unique_id=1281108664]
+layout_mode = 0
+offset_left = 259.0
+offset_top = 173.0
+offset_right = 517.0
+offset_bottom = 387.0
+theme_override_font_sizes/font_size = 60
+text = "SPEED"
+
+[node name="AbilityButton2" type="Button" parent="." unique_id=1296340359]
+layout_mode = 0
+offset_left = 664.0
+offset_top = 171.0
+offset_right = 922.0
+offset_bottom = 385.0
+theme_override_font_sizes/font_size = 60
+text = "CLEAN"
+
+[node name="Label" type="Label" parent="." unique_id=106010235]
+layout_mode = 0
+offset_left = 522.0
+offset_top = 130.0
+offset_right = 629.0
+offset_bottom = 153.0
+text = "pick an ability"
+
+[connection signal="pressed" from="AbilityButton1" to="." method="_on_ability_button_1_pressed"]
+[connection signal="pressed" from="AbilityButton2" to="." method="_on_ability_button_2_pressed"]
