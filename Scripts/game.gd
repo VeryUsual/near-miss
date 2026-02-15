@@ -40,10 +40,41 @@ func _ready() -> void:
 		spawn_timer.wait_time = 0.4
 	else:
 		spawn_timer.wait_time = 0.6
+	if Globals.wave >= 4:
+		spawn_timer.wait_time = spawn_timer.wait_time / 1.5
+	if Globals.wave >= 8:
+		spawn_timer.wait_time = spawn_timer.wait_time / 1.5
 	spawn_timer.one_shot = false
 	spawn_timer.autostart = true
 	add_child(spawn_timer)
 	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
+	
+	if Globals.difficulty != "GOD":
+		if Globals.wave >= 2:
+			$ArcherEnemy.enabled = true
+		if Globals.wave >= 3:
+			$ArcherEnemy2.enabled = true
+		if Globals.wave >= 4:
+			$ArcherEnemy3.enabled = true
+		if Globals.wave >= 5:
+			$ArcherEnemy4.enabled = true
+	else:
+		$ArcherEnemy.enabled = true
+		$ArcherEnemy2.enabled = true
+		$ArcherEnemy3.enabled = true
+		$ArcherEnemy4.enabled = true
+	
+	if Globals.wave == 4:
+		$KingSnipe.enabled = true
+	
+	$Camera2D.zoom = Vector2(0.7, 0.7)
+	var tween := create_tween()
+	tween.tween_property(
+		$Camera2D,
+		"zoom",
+		Vector2(0.9, 0.9),
+		1.3
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	
 	$CanvasLayer/Countdown.scale = Vector2.ONE
 	$CanvasLayer/Countdown.pivot_offset = $CanvasLayer/Countdown.size / 2
@@ -115,6 +146,16 @@ func _input(event: InputEvent) -> void:
 			saturationtween.tween_property(self, "saturation_value", 2.0, 0.2)
 		$CanvasLayer/CardDeck.visible = false
 		Engine.time_scale = current_normal_timescale
+	
+	if Input.is_action_just_pressed("esc"):
+		if $CanvasLayer/ESCMenu.visible:
+			Engine.time_scale = 1.0
+			current_normal_timescale = 1.0
+			$CanvasLayer/ESCMenu.visible = false
+		else:
+			Engine.time_scale = 0.001
+			current_normal_timescale = 0.001
+			$CanvasLayer/ESCMenu.visible = true
 
 func _on_card_1_area_2d_mouse_entered() -> void:
 	var cardopentween = get_tree().create_tween()
@@ -221,3 +262,6 @@ func _on_card_3_area_2d_mouse_entered() -> void:
 func _on_card_3_area_2d_mouse_exited() -> void:
 	var cardclosetween = get_tree().create_tween()
 	cardclosetween.tween_property($CanvasLayer/CardDeck/Card3Area2D, "position", Vector2(325, 0), 0.06).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+
+func _on_exit_to_main_menu_pressed() -> void:
+	get_tree().change_scene_to_file("res://Scenes/MainMenu.tscn")

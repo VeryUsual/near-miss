@@ -11,31 +11,78 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xrutj")
 
-[node name="AbilityButton1" type="Button" parent="." unique_id=1281108664]
-layout_mode = 0
-offset_left = 259.0
-offset_top = 173.0
-offset_right = 517.0
-offset_bottom = 387.0
+[node name="AbilityPicking" type="VBoxContainer" parent="." unique_id=522138728]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 379.0
+offset_right = -379.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="AbilityPicking" unique_id=106010235]
+layout_mode = 2
+theme_override_font_sizes/font_size = 34
+text = "pick an ability"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AbilityPicking" unique_id=765935975]
+layout_mode = 2
+
+[node name="AbilityButton1" type="Button" parent="AbilityPicking/HBoxContainer" unique_id=1281108664]
+layout_mode = 2
 theme_override_font_sizes/font_size = 60
 text = "SPEED"
 
-[node name="AbilityButton2" type="Button" parent="." unique_id=1296340359]
-layout_mode = 0
-offset_left = 664.0
-offset_top = 171.0
-offset_right = 922.0
-offset_bottom = 385.0
+[node name="AbilityButton2" type="Button" parent="AbilityPicking/HBoxContainer" unique_id=1296340359]
+layout_mode = 2
 theme_override_font_sizes/font_size = 60
 text = "CLEAN"
 
-[node name="Label" type="Label" parent="." unique_id=106010235]
-layout_mode = 0
-offset_left = 522.0
-offset_top = 130.0
-offset_right = 629.0
-offset_bottom = 153.0
-text = "pick an ability"
+[node name="UpgradePicking" type="VBoxContainer" parent="." unique_id=2011381413]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 379.0
+offset_right = -379.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
 
-[connection signal="pressed" from="AbilityButton1" to="." method="_on_ability_button_1_pressed"]
-[connection signal="pressed" from="AbilityButton2" to="." method="_on_ability_button_2_pressed"]
+[node name="Label" type="Label" parent="UpgradePicking" unique_id=1319664580]
+layout_mode = 2
+theme_override_font_sizes/font_size = 34
+text = "pick an upgrade"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="UpgradePicking" unique_id=1613168898]
+layout_mode = 2
+
+[node name="Control2" type="Control" parent="UpgradePicking" unique_id=1445220519]
+layout_mode = 2
+
+[node name="Control3" type="Control" parent="UpgradePicking" unique_id=673874930]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UpgradePicking" unique_id=222294084]
+layout_mode = 2
+theme_override_constants/separation = 60
+
+[node name="UpgradeButton1" type="Button" parent="UpgradePicking/HBoxContainer" unique_id=567929048]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "+1 speed"
+
+[node name="UpgradeButton2" type="Button" parent="UpgradePicking/HBoxContainer" unique_id=215139223]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "-1 enemy spawns"
+
+[connection signal="pressed" from="AbilityPicking/HBoxContainer/AbilityButton1" to="." method="_on_ability_button_1_pressed"]
+[connection signal="pressed" from="AbilityPicking/HBoxContainer/AbilityButton2" to="." method="_on_ability_button_2_pressed"]
+[connection signal="pressed" from="UpgradePicking/HBoxContainer/UpgradeButton1" to="." method="_on_upgrade_button_1_pressed"]
+[connection signal="pressed" from="UpgradePicking/HBoxContainer/UpgradeButton2" to="." method="_on_upgrade_button_2_pressed"]

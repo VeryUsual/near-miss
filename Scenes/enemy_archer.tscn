@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dxxp84ho78cqr"]
+
+[ext_resource type="Script" uid="uid://b8hqrhbw8kg31" path="res://scripts/enemy_archer.gd" id="1_mlhqj"]
+
+[node name="ArcherEnemy" type="CharacterBody2D" unique_id=1266776395]
+script = ExtResource("1_mlhqj")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=809120680]
+color = Color(0, 0.7861883, 0.5409784, 1)
+polygon = PackedVector2Array(0, 20, 11, -13, -12, -13)
+uv = PackedVector2Array(-114.900024, -20.199997, -83, 27.100006, -142.40002, 30.40001)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=160712623]
+polygon = PackedVector2Array(-12, -13, 11, -13, 0, 20)
+
+[node name="ShootTimer" type="Timer" parent="." unique_id=215342351]
+autostart = true
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

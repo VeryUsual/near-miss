@@ -5,6 +5,11 @@ var fake_tweened_last_game_duration: int = 0: set = _on_fake_tweened_last_game_d
 var tween: Tween
 
 func _ready() -> void:
+	Globals.equipped_cards = ["slowmo"]
+	Globals.player_speed = 500
+	
+	Globals.wave -= 1
+	
 	Engine.time_scale = 1.0
 	$PBLabel.hide()
 	
@@ -25,11 +30,13 @@ func _on_last_game_dur_set(new_value: int) -> void:
 		fake_tweened_last_game_duration = last_game_duration
 
 func _on_button_pressed() -> void:
+	Globals.wave = 1
 	get_tree().change_scene_to_file("res://Scenes/MainMenu.tscn")
 
 func _on_button_2_pressed() -> void:
+	Globals.wave = 1
 	get_tree().change_scene_to_file("res://Scenes/game.tscn")
 
 func _on_fake_tweened_last_game_duration_set(new_value: int) -> void:
 	fake_tweened_last_game_duration = new_value
-	$Label2.text = "You survived for " + str(Globals.wave) + " waves."
+	$Label2.text = "You survived for " + str(Globals.wave) + " waves on " + Globals.difficulty.to_lower() + " difficulty."

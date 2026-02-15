@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cw0btegy438j8"]
+
+[ext_resource type="Script" uid="uid://bxm8m4o6rkn37" path="res://Scripts/archer_enemy_bullet.gd" id="1_5vjdq"]
+
+[node name="ArcherEnemyBulletNonLethal" type="CharacterBody2D" unique_id=620320996]
+collision_layer = 3
+script = ExtResource("1_5vjdq")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1089022433]
+color = Color(1, 0, 0, 1)
+polygon = PackedVector2Array(6, 0, 0, -6, -6, 0, 0, 6)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1082001258]
+polygon = PackedVector2Array(0, -6, 6, 0, 0, 6, -6, 0)

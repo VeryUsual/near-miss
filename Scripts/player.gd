@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var speed = 500
+var speed = Globals.player_speed
 var shiftingenergy = 100
 
 var gameover = false

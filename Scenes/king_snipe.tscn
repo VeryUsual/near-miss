@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://cccylbfd1qcg1"]
+
+[ext_resource type="Script" uid="uid://cyu2he17mjhau" path="res://Scripts/king_snipe.gd" id="1_6ocou"]
+
+[node name="KingSnipe" type="CharacterBody2D" unique_id=1266776395]
+script = ExtResource("1_6ocou")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=809120680]
+color = Color(0, 0.7861883, 0.5409784, 1)
+polygon = PackedVector2Array(0, 30, 34, -14, -34, -14)
+uv = PackedVector2Array(-114.900024, -20.199997, -83, 27.100006, -142.40002, 30.40001)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=160712623]
+polygon = PackedVector2Array(-34, -14, 34, -14, 0, 30)
+
+[node name="ShootTimer" type="Timer" parent="." unique_id=215342351]
+wait_time = 0.25
+autostart = true
+
+[node name="Label" type="Label" parent="." unique_id=228232251]
+offset_left = -41.0
+offset_top = -55.0
+offset_right = 42.0
+offset_bottom = -32.0
+text = "King Snipe"
+horizontal_alignment = 1
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

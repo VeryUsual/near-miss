@@ -11,6 +11,8 @@
 [ext_resource type="AudioStream" uid="uid://c0m8wbgppw8pc" path="res://Assets/Music/background.mp3" id="9_h4fw4"]
 [ext_resource type="Texture2D" uid="uid://dkp0e48p2p4hm" path="res://Assets/Images/SpeedCard.png" id="9_o5yvi"]
 [ext_resource type="AudioStream" uid="uid://bpdflnh3kue6u" path="res://Assets/Music/explosion.mp3" id="10_ldgsr"]
+[ext_resource type="PackedScene" uid="uid://dxxp84ho78cqr" path="res://Scenes/enemy_archer.tscn" id="12_rku1e"]
+[ext_resource type="PackedScene" uid="uid://cccylbfd1qcg1" path="res://Scenes/king_snipe.tscn" id="13_rfjv2"]
 
 [sub_resource type="Environment" id="Environment_wrm1d"]
 background_mode = 3
@@ -247,6 +249,44 @@ theme_override_font_sizes/font_size = 50
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="ESCMenu" type="Control" parent="CanvasLayer" unique_id=1343179515]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -288.0
+offset_top = -193.0
+offset_right = 288.0
+offset_bottom = 193.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/ESCMenu" unique_id=328574193]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.047058824, 0.047058824, 0.047058824, 0.7137255)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ESCMenu" unique_id=1517359352]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="ExitToMainMenu" type="Button" parent="CanvasLayer/ESCMenu/VBoxContainer" unique_id=762089315]
+layout_mode = 2
+text = "Exit to Main Menu"
+
 [node name="Boundaries" type="StaticBody2D" parent="." unique_id=1093361642]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries" unique_id=342298608]
@@ -274,6 +314,21 @@ parameters/looping = true
 [node name="ExplosionSFXAudioPlayer" type="AudioStreamPlayer" parent="." unique_id=18353019]
 stream = ExtResource("10_ldgsr")
 
+[node name="ArcherEnemy" parent="." unique_id=1266776395 instance=ExtResource("12_rku1e")]
+position = Vector2(1044, 26)
+
+[node name="ArcherEnemy2" parent="." unique_id=1009099736 instance=ExtResource("12_rku1e")]
+position = Vector2(134, 24)
+
+[node name="ArcherEnemy3" parent="." unique_id=1607909135 instance=ExtResource("12_rku1e")]
+position = Vector2(140, 601)
+
+[node name="ArcherEnemy4" parent="." unique_id=1604596685 instance=ExtResource("12_rku1e")]
+position = Vector2(1048, 615)
+
+[node name="KingSnipe" parent="." unique_id=699061258 instance=ExtResource("13_rfjv2")]
+position = Vector2(596, 309)
+
 [connection signal="input_event" from="CanvasLayer/CardDeck/Card1Area2D" to="." method="_on_card_1_area_2d_input_event"]
 [connection signal="mouse_entered" from="CanvasLayer/CardDeck/Card1Area2D" to="." method="_on_card_1_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/CardDeck/Card1Area2D" to="." method="_on_card_1_area_2d_mouse_exited"]
@@ -283,3 +338,4 @@ stream = ExtResource("10_ldgsr")
 [connection signal="input_event" from="CanvasLayer/CardDeck/Card3Area2D" to="." method="_on_card_3_area_2d_input_event"]
 [connection signal="mouse_entered" from="CanvasLayer/CardDeck/Card3Area2D" to="." method="_on_card_3_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/CardDeck/Card3Area2D" to="." method="_on_card_3_area_2d_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer/ESCMenu/VBoxContainer/ExitToMainMenu" to="." method="_on_exit_to_main_menu_pressed"]

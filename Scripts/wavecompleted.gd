@@ -3,6 +3,12 @@ extends Control
 var abilities_to_buy = []
 
 func _ready() -> void:
+	if Globals.wave % 2 != 0: # if the wave isn't a multiple of 2, just go to next wave
+		next_wave()
+	
+	$UpgradePicking.hide()
+	$AbilityPicking.show()
+	
 	if "speed" not in Globals.equipped_cards:
 		abilities_to_buy.append("speed")
 	if "clean" not in Globals.equipped_cards:
@@ -12,8 +18,8 @@ func _ready() -> void:
 		if len(abilities_to_buy) < 2:
 			abilities_to_buy.append("")
 	
-	$AbilityButton1.text = abilities_to_buy[0]
-	$AbilityButton2.text = abilities_to_buy[1]
+	$AbilityPicking/HBoxContainer/AbilityButton1.text = abilities_to_buy[0]
+	$AbilityPicking/HBoxContainer/AbilityButton2.text = abilities_to_buy[1]
 
 func next_wave():
 	Globals.wave += 1
@@ -21,8 +27,17 @@ func next_wave():
 
 func _on_ability_button_1_pressed() -> void:
 	Globals.equipped_cards.append(abilities_to_buy[0])
-	next_wave()
+	$AbilityPicking.hide()
+	$UpgradePicking.show()
 
 func _on_ability_button_2_pressed() -> void:
 	Globals.equipped_cards.append(abilities_to_buy[1])
+	$AbilityPicking.hide()
+	$UpgradePicking.show()
+
+func _on_upgrade_button_1_pressed() -> void:
+	Globals.player_speed += 50
+	next_wave()
+
+func _on_upgrade_button_2_pressed() -> void:
 	next_wave()
