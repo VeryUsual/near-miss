@@ -39,6 +39,12 @@ adjustment_saturation = 2.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i6g32"]
 size = Vector2(134, 194)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1phco"]
+bg_color = Color(0.103743516, 0.103743546, 0.10374347, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nb51f"]
+bg_color = Color(1, 0, 0, 1)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3dryh"]
 size = Vector2(1332, 21)
 
@@ -108,9 +114,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -69.0
-offset_top = 16.0
+offset_top = 52.0
 offset_right = 69.0
-offset_bottom = 71.0
+offset_bottom = 107.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 40
 text = "Wave 1"
@@ -121,9 +127,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -64.0
-offset_top = 73.0
+offset_top = 109.0
 offset_right = 64.0
-offset_bottom = 128.0
+offset_bottom = 164.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 40
 text = "0.00"
@@ -298,6 +304,21 @@ offset_bottom = 42.0
 theme_override_font_sizes/font_size = 22
 text = "Coins: 0"
 
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer" unique_id=303921893]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -179.0
+offset_top = 11.0
+offset_right = 179.0
+offset_bottom = 38.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_1phco")
+theme_override_styles/fill = SubResource("StyleBoxFlat_nb51f")
+max_value = 3.0
+value = 2.0
+show_percentage = false
+
 [node name="Boundaries" type="StaticBody2D" parent="." unique_id=1093361642]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries" unique_id=342298608]
@@ -344,7 +365,7 @@ position = Vector2(596, 309)
 position = Vector2(333, 232)
 
 [node name="CoinSpawnTimer" type="Timer" parent="." unique_id=1119954399]
-wait_time = 1.0999999999999999
+wait_time = 1.1
 autostart = true
 
 [connection signal="input_event" from="CanvasLayer/CardDeck/Card1Area2D" to="." method="_on_card_1_area_2d_input_event"]

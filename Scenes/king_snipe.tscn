@@ -2,6 +2,16 @@
 
 [ext_resource type="Script" uid="uid://cyu2he17mjhau" path="res://Scripts/king_snipe.gd" id="1_6ocou"]
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6ocou"]
+particle_flag_disable_z = true
+radial_velocity_min = -1000.0
+radial_velocity_max = 999.99994
+gravity = Vector3(0, 8, 0)
+scale_min = 2.0
+scale_max = 3.0
+hue_variation_min = -1.0
+hue_variation_max = -0.87
+
 [node name="KingSnipe" type="CharacterBody2D" unique_id=1266776395]
 script = ExtResource("1_6ocou")
 
@@ -14,7 +24,7 @@ uv = PackedVector2Array(-114.900024, -20.199997, -83, 27.100006, -142.40002, 30.
 polygon = PackedVector2Array(-34, -14, 34, -14, 0, 30)
 
 [node name="ShootTimer" type="Timer" parent="." unique_id=215342351]
-wait_time = 0.12
+wait_time = 0.1
 autostart = true
 
 [node name="Label" type="Label" parent="." unique_id=228232251]
@@ -24,5 +34,17 @@ offset_right = 42.0
 offset_bottom = -25.0
 text = "King Snipe"
 horizontal_alignment = 1
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=636380278]
+emitting = false
+amount = 500
+preprocess = 1.0
+speed_scale = 2.0
+explosiveness = 0.5
+randomness = 1.0
+trail_enabled = true
+trail_lifetime = 0.1
+trail_sections = 4
+process_material = SubResource("ParticleProcessMaterial_6ocou")
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

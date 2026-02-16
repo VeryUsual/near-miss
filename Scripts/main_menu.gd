@@ -31,6 +31,7 @@ func _on_button_pressed() -> void:
 
 func _on_fade_timer_timeout() -> void:
 	if button_type == "play":
+		#Globals.wave = 4 ###### CHEAT
 		if $VBoxContainer/HBoxContainer/OptionButton.get_selected() == -1:
 			Globals.difficulty = "Medium"
 		Globals.difficulty = $VBoxContainer/HBoxContainer/OptionButton.get_item_text($VBoxContainer/HBoxContainer/OptionButton.get_selected()).strip_edges(true, true)

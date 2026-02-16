@@ -69,7 +69,7 @@ func _ready() -> void:
 	
 	if Globals.wave == 4:
 		$KingSnipe.enabled = true
-		spawn_timer.wait_time = 2.2
+		spawn_timer.wait_time = 5.0
 	
 	$Camera2D.zoom = Vector2(0.7, 0.7)
 	var tween := create_tween()
@@ -277,3 +277,10 @@ func _on_coin_spawn_timer_timeout() -> void:
 	var coin = coin_scene.instantiate()
 	add_child(coin)
 	coin.position = Vector2(randi_range(20, 1000), randi_range(20, 600))
+	
+	if Globals.wave == 4:
+		var coinn
+		for n in range(3):
+			coinn = coin_scene.instantiate()
+			add_child(coinn)
+			coinn.position = Vector2(randi_range(20, 1000), randi_range(20, 600))

@@ -21,8 +21,8 @@ Globals="*uid://dpl1b5t2mrnpe"
 
 [editor]
 
-movie_writer/movie_file="C:\\Users\\ARK\\Documents\\swccodingvideo\\nearmiss.avi"
-movie_writer/fps=100
+movie_writer/video_quality=0.9
+movie_writer/movie_file="C:/Users/ARK/Documents/NearMissMovieFiles/file.avi"
 
 [editor_plugins]
 

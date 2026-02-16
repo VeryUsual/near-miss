@@ -8,11 +8,11 @@ var direction
 
 func _ready() -> void:
 	if Globals.difficulty == "Easy":
-		SPEED = 150
+		SPEED = 280
 	elif Globals.difficulty == "Hard":
-		SPEED = 550
+		SPEED = 500
 	elif Globals.difficulty == "GOD":
-		SPEED = 650
+		SPEED = 600
 	
 	destination = player.global_position
 	direction = global_position.direction_to(destination)
