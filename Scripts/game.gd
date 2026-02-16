@@ -80,6 +80,11 @@ func _ready() -> void:
 		1.2
 	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	
+	if Globals.master_volume <= 50 or Globals.music_volume <= 50:
+		$BackgroundMusicAudioPlayer.volume_db = -10
+	else:
+		$BackgroundMusicAudioPlayer.volume_db = -5
+	
 	$CanvasLayer/Countdown.scale = Vector2.ONE
 	$CanvasLayer/Countdown.pivot_offset = $CanvasLayer/Countdown.size / 2
 	_next_number()

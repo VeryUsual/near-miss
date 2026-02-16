@@ -5,7 +5,7 @@ extends Camera2D
 @export var max_roll : float = 0.1
 
 var trauma : float = 0.0
-var trauma_power : int = 2
+var trauma_power : int = Globals.screenshake_power
 
 func _ready() -> void:
 	randomize()

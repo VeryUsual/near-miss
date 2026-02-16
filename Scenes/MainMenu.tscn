@@ -165,6 +165,18 @@ theme_override_font_sizes/font_size = 20
 text = "For new players: play easy mode, trust me, also survive until wave 5 to
 experience a good amount of content!"
 
+[node name="SettingsButton" type="Button" parent="." unique_id=1634334710]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = -60.0
+offset_right = 152.0
+offset_bottom = -18.0
+grow_vertical = 0
+text = "Settings"
+
 [node name="FadeTransition" parent="." unique_id=758593637 instance=ExtResource("3_8saeu")]
 visible = false
 layout_mode = 1
@@ -173,4 +185,5 @@ layout_mode = 1
 one_shot = true
 
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="timeout" from="FadeTransition/fade_timer" to="." method="_on_fade_timer_timeout"]

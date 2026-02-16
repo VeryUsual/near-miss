@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://7c4frea4gpv8"]
+
+[ext_resource type="Script" uid="uid://ds2frerd6y3cg" path="res://Scripts/settings.gd" id="1_4geyq"]
+
+[node name="Settings" type="Control" unique_id=1701730021]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4geyq")
+
+[node name="TabContainer" type="TabContainer" parent="." unique_id=1615899123]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 0
+
+[node name="Audio" type="MarginContainer" parent="TabContainer" unique_id=489634841]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Audio" unique_id=800906874]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Audio/VBoxContainer" unique_id=1614186402]
+layout_mode = 2
+text = "Master Volume"
+
+[node name="MasterVolumeSlider" type="HSlider" parent="TabContainer/Audio/VBoxContainer" unique_id=1273457815]
+layout_mode = 2
+value = 100.0
+
+[node name="Label2" type="Label" parent="TabContainer/Audio/VBoxContainer" unique_id=1552034838]
+layout_mode = 2
+text = "Music Volume"
+
+[node name="MusicVolumeSlider" type="HSlider" parent="TabContainer/Audio/VBoxContainer" unique_id=753485240]
+layout_mode = 2
+value = 100.0
+
+[node name="Label3" type="Label" parent="TabContainer/Audio/VBoxContainer" unique_id=2100436081]
+layout_mode = 2
+text = "Sound Effects (SFX) Volume"
+
+[node name="SFXVolumeSlider" type="HSlider" parent="TabContainer/Audio/VBoxContainer" unique_id=142071777]
+layout_mode = 2
+value = 100.0
+
+[node name="Graphics" type="MarginContainer" parent="TabContainer" unique_id=811848982]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+metadata/_tab_index = 1
+
+[node name="Graphics" type="VBoxContainer" parent="TabContainer/Graphics" unique_id=671601684]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="TabContainer/Graphics/Graphics" unique_id=2036102086]
+layout_mode = 2
+text = "Screen Shake Intensity"
+
+[node name="ScreenShakeIntensitySlider" type="HSlider" parent="TabContainer/Graphics/Graphics" unique_id=1605489300]
+layout_mode = 2
+min_value = 1.0
+max_value = 2.0
+value = 2.0
+
+[node name="Controls" type="VBoxContainer" parent="TabContainer" unique_id=2125157071]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Controls" unique_id=920728483]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Label5" type="Label" parent="TabContainer/Controls/MarginContainer" unique_id=1554935860]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Controls:
+W: Move up
+A: Move left
+S: Move down
+D: Move right
+Shift: Sprint
+F: Open deck
+Esc: Open pause menu"
+
+[node name="ApplyAndExitButton" type="Button" parent="." unique_id=898413702]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -400.0
+offset_top = -68.0
+offset_right = -16.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 29
+text = "Apply & Exit"
+
+[connection signal="pressed" from="ApplyAndExitButton" to="." method="_on_apply_and_exit_button_pressed"]

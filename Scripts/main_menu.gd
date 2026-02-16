@@ -36,3 +36,6 @@ func _on_fade_timer_timeout() -> void:
 			Globals.difficulty = "Medium"
 		Globals.difficulty = $VBoxContainer/HBoxContainer/OptionButton.get_item_text($VBoxContainer/HBoxContainer/OptionButton.get_selected()).strip_edges(true, true)
 		get_tree().change_scene_to_file("res://Scenes/game.tscn")
+
+func _on_settings_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://Scenes/settings.tscn")
