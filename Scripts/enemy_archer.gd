@@ -18,6 +18,8 @@ func _on_shoot_timer_timeout() -> void:
 
 func _process(delta: float) -> void:
 	if enabled:
+		$CollisionPolygon2D.disabled = false
 		visible = true
 	else:
+		$CollisionPolygon2D.disabled = true
 		visible = false

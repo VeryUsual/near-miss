@@ -6,6 +6,8 @@ func _ready() -> void:
 	if Globals.wave % 2 != 0: # if the wave isn't a multiple of 2, just go to next wave
 		next_wave()
 	
+	$CoinsLabel.text = "Coins: " + str(Globals.coins)
+	
 	$UpgradePicking.hide()
 	$AbilityPicking.show()
 	
@@ -36,8 +38,22 @@ func _on_ability_button_2_pressed() -> void:
 	$UpgradePicking.show()
 
 func _on_upgrade_button_1_pressed() -> void:
-	Globals.player_speed += 50
-	next_wave()
+	if Globals.coins >= 10:
+		Globals.coins -= 10
+		Globals.player_speed += 50
+		next_wave()
+	else:
+		$UpgradePicking/HBoxContainer/UpgradeButton1.disabled = true
+		$UpgradePicking/HBoxContainer/UpgradeButton1.text = "Too poor to buy."
 
 func _on_upgrade_button_2_pressed() -> void:
+	if Globals.coins >= 11:
+		Globals.coins -= 11
+		# todo: actually implement this
+		next_wave()
+	else:
+		$UpgradePicking/HBoxContainer/UpgradeButton2.disabled = true
+		$UpgradePicking/HBoxContainer/UpgradeButton2.text = "Too poor to buy."
+
+func _on_skip_button_pressed() -> void:
 	next_wave()

@@ -17,6 +17,8 @@ var environment
 
 var game_duration := 0.0
 
+var coin_scene = preload("res://Scenes/coin.tscn")
+
 var saturation_value: float = 1.0:
 	set(value):
 		saturation_value = value
@@ -28,6 +30,7 @@ func _ready() -> void:
 	environment = $WorldEnvironment.environment
 	
 	$CanvasLayer/CardDeck.visible = false
+	$CanvasLayer/CoinLabel.visible = false
 	
 	$CanvasLayer/WaveLabel.text = "Wave " + str(Globals.wave)
 	
@@ -66,6 +69,7 @@ func _ready() -> void:
 	
 	if Globals.wave == 4:
 		$KingSnipe.enabled = true
+		spawn_timer.wait_time = 2.2
 	
 	$Camera2D.zoom = Vector2(0.7, 0.7)
 	var tween := create_tween()
@@ -73,7 +77,7 @@ func _ready() -> void:
 		$Camera2D,
 		"zoom",
 		Vector2(0.9, 0.9),
-		1.3
+		1.2
 	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	
 	$CanvasLayer/Countdown.scale = Vector2.ONE
@@ -186,6 +190,9 @@ func _on_card_1_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx
 
 func _process(delta: float) -> void:
 	if game_started:
+		$CanvasLayer/CoinLabel.visible = true
+		$CanvasLayer/CoinLabel.text = "Coins: " + str(Globals.coins)
+		
 		game_duration += delta
 		if (Globals.wave_durations[Globals.wave-1] - snapped(game_duration, 0.1) <= 0):
 			$CanvasLayer/WaveCompleted.show()
@@ -265,3 +272,8 @@ func _on_card_3_area_2d_mouse_exited() -> void:
 
 func _on_exit_to_main_menu_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/MainMenu.tscn")
+
+func _on_coin_spawn_timer_timeout() -> void:
+	var coin = coin_scene.instantiate()
+	add_child(coin)
+	coin.position = Vector2(randi_range(20, 1000), randi_range(20, 600))

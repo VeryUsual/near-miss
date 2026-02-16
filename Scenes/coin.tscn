@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bqe0ebdnavpes"]
+
+[ext_resource type="Script" uid="uid://c35dk7j2pqd68" path="res://scripts/coin.gd" id="1_2qo34"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sgwqp"]
+radius = 48.0
+
+[node name="Coin" type="Node2D" unique_id=584415852]
+script = ExtResource("1_2qo34")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1388175181]
+position = Vector2(3, 2)
+color = Color(1, 1, 0, 1)
+polygon = PackedVector2Array(-3, -15, 8, -9, 8, 4, -3, 12, -14, 4, -14, -9)
+
+[node name="PickupRange" type="Area2D" parent="." unique_id=2051568561]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupRange" unique_id=1405112727]
+shape = SubResource("CircleShape2D_sgwqp")
+
+[connection signal="body_entered" from="PickupRange" to="." method="_on_pickup_range_body_entered"]

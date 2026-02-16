@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://bpdflnh3kue6u" path="res://Assets/Music/explosion.mp3" id="10_ldgsr"]
 [ext_resource type="PackedScene" uid="uid://dxxp84ho78cqr" path="res://Scenes/enemy_archer.tscn" id="12_rku1e"]
 [ext_resource type="PackedScene" uid="uid://cccylbfd1qcg1" path="res://Scenes/king_snipe.tscn" id="13_rfjv2"]
+[ext_resource type="PackedScene" uid="uid://bqe0ebdnavpes" path="res://Scenes/coin.tscn" id="14_1phco"]
 
 [sub_resource type="Environment" id="Environment_wrm1d"]
 background_mode = 3
@@ -83,6 +84,7 @@ environment = SubResource("Environment_wrm1d")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=17666568]
 
 [node name="FadeTransition" parent="CanvasLayer" unique_id=758593637 instance=ExtResource("8_v158k")]
+visible = false
 
 [node name="WaveCompleted" type="Label" parent="CanvasLayer" unique_id=78838073]
 visible = false
@@ -287,6 +289,15 @@ alignment = 1
 layout_mode = 2
 text = "Exit to Main Menu"
 
+[node name="CoinLabel" type="Label" parent="CanvasLayer" unique_id=647076736]
+visible = false
+offset_left = 12.0
+offset_top = 11.0
+offset_right = 94.0
+offset_bottom = 42.0
+theme_override_font_sizes/font_size = 22
+text = "Coins: 0"
+
 [node name="Boundaries" type="StaticBody2D" parent="." unique_id=1093361642]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries" unique_id=342298608]
@@ -329,6 +340,13 @@ position = Vector2(1048, 615)
 [node name="KingSnipe" parent="." unique_id=699061258 instance=ExtResource("13_rfjv2")]
 position = Vector2(596, 309)
 
+[node name="Coin" parent="." unique_id=584415852 instance=ExtResource("14_1phco")]
+position = Vector2(333, 232)
+
+[node name="CoinSpawnTimer" type="Timer" parent="." unique_id=1119954399]
+wait_time = 1.0999999999999999
+autostart = true
+
 [connection signal="input_event" from="CanvasLayer/CardDeck/Card1Area2D" to="." method="_on_card_1_area_2d_input_event"]
 [connection signal="mouse_entered" from="CanvasLayer/CardDeck/Card1Area2D" to="." method="_on_card_1_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/CardDeck/Card1Area2D" to="." method="_on_card_1_area_2d_mouse_exited"]
@@ -339,3 +357,4 @@ position = Vector2(596, 309)
 [connection signal="mouse_entered" from="CanvasLayer/CardDeck/Card3Area2D" to="." method="_on_card_3_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/CardDeck/Card3Area2D" to="." method="_on_card_3_area_2d_mouse_exited"]
 [connection signal="pressed" from="CanvasLayer/ESCMenu/VBoxContainer/ExitToMainMenu" to="." method="_on_exit_to_main_menu_pressed"]
+[connection signal="timeout" from="CoinSpawnTimer" to="." method="_on_coin_spawn_timer_timeout"]

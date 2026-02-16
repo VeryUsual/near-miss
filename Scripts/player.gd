@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 var speed = Globals.player_speed
 var shiftingenergy = 100
+var coins = 0
 
 var gameover = false
 

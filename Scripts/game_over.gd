@@ -7,6 +7,7 @@ var tween: Tween
 func _ready() -> void:
 	Globals.equipped_cards = ["slowmo"]
 	Globals.player_speed = 500
+	Globals.coins = 0
 	
 	Globals.wave -= 1
 	

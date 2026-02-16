@@ -11,7 +11,17 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xrutj")
 
+[node name="CoinsLabel" type="Label" parent="." unique_id=90134536]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 32.0
+offset_right = 153.0
+offset_bottom = 71.0
+theme_override_font_sizes/font_size = 28
+text = "Coins: 0"
+
 [node name="AbilityPicking" type="VBoxContainer" parent="." unique_id=522138728]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -42,7 +52,6 @@ theme_override_font_sizes/font_size = 60
 text = "CLEAN"
 
 [node name="UpgradePicking" type="VBoxContainer" parent="." unique_id=2011381413]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -75,14 +84,34 @@ theme_override_constants/separation = 60
 [node name="UpgradeButton1" type="Button" parent="UpgradePicking/HBoxContainer" unique_id=567929048]
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
-text = "+1 speed"
+text = "+1 speed
+(10 coins)"
 
 [node name="UpgradeButton2" type="Button" parent="UpgradePicking/HBoxContainer" unique_id=215139223]
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
-text = "-1 enemy spawns"
+text = "-1 enemy spawns
+(11 coins)"
+
+[node name="Control4" type="Control" parent="UpgradePicking" unique_id=1798299970]
+layout_mode = 2
+
+[node name="Control5" type="Control" parent="UpgradePicking" unique_id=249025810]
+layout_mode = 2
+
+[node name="Control6" type="Control" parent="UpgradePicking" unique_id=726637990]
+layout_mode = 2
+
+[node name="Control7" type="Control" parent="UpgradePicking" unique_id=955956517]
+layout_mode = 2
+
+[node name="SkipButton" type="Button" parent="UpgradePicking" unique_id=1896004384]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Skip"
 
 [connection signal="pressed" from="AbilityPicking/HBoxContainer/AbilityButton1" to="." method="_on_ability_button_1_pressed"]
 [connection signal="pressed" from="AbilityPicking/HBoxContainer/AbilityButton2" to="." method="_on_ability_button_2_pressed"]
 [connection signal="pressed" from="UpgradePicking/HBoxContainer/UpgradeButton1" to="." method="_on_upgrade_button_1_pressed"]
 [connection signal="pressed" from="UpgradePicking/HBoxContainer/UpgradeButton2" to="." method="_on_upgrade_button_2_pressed"]
+[connection signal="pressed" from="UpgradePicking/SkipButton" to="." method="_on_skip_button_pressed"]

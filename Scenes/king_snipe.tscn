@@ -14,14 +14,14 @@ uv = PackedVector2Array(-114.900024, -20.199997, -83, 27.100006, -142.40002, 30.
 polygon = PackedVector2Array(-34, -14, 34, -14, 0, 30)
 
 [node name="ShootTimer" type="Timer" parent="." unique_id=215342351]
-wait_time = 0.25
+wait_time = 0.12
 autostart = true
 
 [node name="Label" type="Label" parent="." unique_id=228232251]
 offset_left = -41.0
-offset_top = -55.0
+offset_top = -48.0
 offset_right = 42.0
-offset_bottom = -32.0
+offset_bottom = -25.0
 text = "King Snipe"
 horizontal_alignment = 1
 

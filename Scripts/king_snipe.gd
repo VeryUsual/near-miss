@@ -7,9 +7,9 @@ extends CharacterBody2D
 var x = 1
 
 func _on_shoot_timer_timeout() -> void:
-	if enabled:
+	if enabled and get_tree().current_scene.game_started:
 		var bullet = non_lethal_bullet_scene.instantiate()
-		if x == 4:
+		if x == 10:
 			bullet = bullet_scene.instantiate()
 			x = 1
 		add_child(bullet)
@@ -19,6 +19,8 @@ func _on_shoot_timer_timeout() -> void:
 
 func _process(delta: float) -> void:
 	if enabled:
+		$CollisionPolygon2D.disabled = false
 		visible = true
 	else:
+		$CollisionPolygon2D.disabled = true
 		visible = false
