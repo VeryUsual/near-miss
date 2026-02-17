@@ -162,7 +162,7 @@ offset_bottom = -121.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 20
-text = "For new players: play easy mode, trust me, also survive until wave 5 to
+text = "For new players: play easy mode, trust me, also survive until wave 7 to
 experience a good amount of content!"
 
 [node name="SettingsButton" type="Button" parent="." unique_id=1634334710]
