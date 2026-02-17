@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dxxp84ho78cqr" path="res://Scenes/enemy_archer.tscn" id="12_rku1e"]
 [ext_resource type="PackedScene" uid="uid://cccylbfd1qcg1" path="res://Scenes/king_snipe.tscn" id="13_rfjv2"]
 [ext_resource type="PackedScene" uid="uid://bqe0ebdnavpes" path="res://Scenes/coin.tscn" id="14_1phco"]
+[ext_resource type="PackedScene" uid="uid://dwf2a03i5m2fp" path="res://Scenes/the_emperor.tscn" id="15_nb51f"]
 
 [sub_resource type="Environment" id="Environment_wrm1d"]
 background_mode = 3
@@ -360,6 +361,9 @@ position = Vector2(1048, 615)
 
 [node name="KingSnipe" parent="." unique_id=699061258 instance=ExtResource("13_rfjv2")]
 position = Vector2(596, 309)
+
+[node name="TheEmperor" parent="." unique_id=81410407 instance=ExtResource("15_nb51f")]
+position = Vector2(475, 224)
 
 [node name="Coin" parent="." unique_id=584415852 instance=ExtResource("14_1phco")]
 position = Vector2(333, 232)

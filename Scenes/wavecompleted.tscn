@@ -83,15 +83,21 @@ theme_override_constants/separation = 60
 
 [node name="UpgradeButton1" type="Button" parent="UpgradePicking/HBoxContainer" unique_id=567929048]
 layout_mode = 2
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 45
 text = "+1 speed
 (10 coins)"
 
 [node name="UpgradeButton2" type="Button" parent="UpgradePicking/HBoxContainer" unique_id=215139223]
 layout_mode = 2
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 45
 text = "-1 enemy spawns
 (11 coins)"
+
+[node name="UpgradeButton3" type="Button" parent="UpgradePicking/HBoxContainer" unique_id=1625705852]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "+1 max hp
+(15 coins)"
 
 [node name="Control4" type="Control" parent="UpgradePicking" unique_id=1798299970]
 layout_mode = 2
@@ -114,4 +120,5 @@ text = "Skip"
 [connection signal="pressed" from="AbilityPicking/HBoxContainer/AbilityButton2" to="." method="_on_ability_button_2_pressed"]
 [connection signal="pressed" from="UpgradePicking/HBoxContainer/UpgradeButton1" to="." method="_on_upgrade_button_1_pressed"]
 [connection signal="pressed" from="UpgradePicking/HBoxContainer/UpgradeButton2" to="." method="_on_upgrade_button_2_pressed"]
+[connection signal="pressed" from="UpgradePicking/HBoxContainer/UpgradeButton3" to="." method="_on_upgrade_button_3_pressed"]
 [connection signal="pressed" from="UpgradePicking/SkipButton" to="." method="_on_skip_button_pressed"]

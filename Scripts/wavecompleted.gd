@@ -3,6 +3,9 @@ extends Control
 var abilities_to_buy = []
 
 func _ready() -> void:
+	if Globals.wave == 20:
+		get_tree().change_scene_to_file("res://Scenes/GameOver.tscn")
+	
 	if Globals.wave % 2 != 0: # if the wave isn't a multiple of 2, just go to next wave
 		next_wave()
 	
@@ -57,3 +60,12 @@ func _on_upgrade_button_2_pressed() -> void:
 
 func _on_skip_button_pressed() -> void:
 	next_wave()
+
+func _on_upgrade_button_3_pressed() -> void:
+	if Globals.coins >= 10:
+		Globals.coins -= 15
+		Globals.max_hp += 1
+		next_wave()
+	else:
+		$UpgradePicking/HBoxContainer/UpgradeButton3.disabled = true
+		$UpgradePicking/HBoxContainer/UpgradeButton3.text = "Too poor to buy."

@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://dwf2a03i5m2fp"]
+
+[ext_resource type="Script" uid="uid://txnjtc5bro4x" path="res://scripts/the_emperor.gd" id="1_n5vul"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6ocou"]
+particle_flag_disable_z = true
+radial_velocity_min = -1000.0
+radial_velocity_max = 999.99994
+gravity = Vector3(0, 8, 0)
+scale_min = 2.0
+scale_max = 3.0
+hue_variation_min = -1.0
+hue_variation_max = -0.87
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n5vul"]
+radius = 51.009804
+
+[node name="TheEmperor" type="CharacterBody2D" unique_id=1266776395]
+script = ExtResource("1_n5vul")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=809120680]
+color = Color(18.892157, 0, 6.0036535, 1)
+polygon = PackedVector2Array(0, 46, 46, -14, -44, -14)
+uv = PackedVector2Array(-114.900024, -20.199997, -83, 27.100006, -142.40002, 30.40001)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=160712623]
+polygon = PackedVector2Array(-44, -14, 46, -14, 0, 47)
+
+[node name="ShootTimer" type="Timer" parent="." unique_id=215342351]
+wait_time = 1.5
+autostart = true
+
+[node name="Label" type="Label" parent="." unique_id=228232251]
+offset_left = -50.0
+offset_top = -49.0
+offset_right = 50.0
+offset_bottom = -26.0
+text = "The Emperor"
+horizontal_alignment = 1
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=636380278]
+emitting = false
+amount = 500
+preprocess = 1.0
+speed_scale = 2.0
+explosiveness = 0.5
+randomness = 1.0
+trail_enabled = true
+trail_lifetime = 0.1
+trail_sections = 4
+process_material = SubResource("ParticleProcessMaterial_6ocou")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1074544534]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=247376129]
+position = Vector2(0, 9)
+shape = SubResource("CircleShape2D_n5vul")
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

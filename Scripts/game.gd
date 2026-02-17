@@ -34,6 +34,8 @@ func _ready() -> void:
 	
 	$CanvasLayer/WaveLabel.text = "Wave " + str(Globals.wave)
 	
+	$CanvasLayer/HealthBar.max_value = Globals.max_hp
+	
 	$CanvasLayer/FadeTransition/AnimationPlayer.play("fade_out")
 	
 	spawn_timer = Timer.new()
@@ -43,10 +45,6 @@ func _ready() -> void:
 		spawn_timer.wait_time = 0.4
 	else:
 		spawn_timer.wait_time = 0.6
-	if Globals.wave >= 4:
-		spawn_timer.wait_time = spawn_timer.wait_time / 1.5
-	if Globals.wave >= 8:
-		spawn_timer.wait_time = spawn_timer.wait_time / 1.5
 	spawn_timer.one_shot = false
 	spawn_timer.autostart = true
 	add_child(spawn_timer)
@@ -70,6 +68,18 @@ func _ready() -> void:
 	if Globals.wave == 4:
 		$KingSnipe.enabled = true
 		spawn_timer.wait_time = 5.0
+		
+		$ArcherEnemy/ShootTimer.wait_time = 2.5
+		$ArcherEnemy2/ShootTimer.wait_time = 2.5
+		$ArcherEnemy3/ShootTimer.wait_time = 2.5
+	
+	if Globals.wave == 6:
+		$TheEmperor.enabled = true
+		spawn_timer.wait_time = 4.0
+		
+		$ArcherEnemy/ShootTimer.wait_time = 2.5
+		$ArcherEnemy2/ShootTimer.wait_time = 2.5
+		$ArcherEnemy3/ShootTimer.wait_time = 2.5
 	
 	$Camera2D.zoom = Vector2(0.7, 0.7)
 	var tween := create_tween()
@@ -202,7 +212,8 @@ func _process(delta: float) -> void:
 		if (Globals.wave_durations[Globals.wave-1] - snapped(game_duration, 0.1) <= 0):
 			$CanvasLayer/WaveCompleted.show()
 			await get_tree().create_timer(0.5).timeout
-			get_tree().change_scene_to_file("res://Scenes/wavecompleted.tscn")
+			if get_tree() != null:
+				get_tree().change_scene_to_file("res://Scenes/wavecompleted.tscn")
 		var gamedurlabeltext = str(Globals.wave_durations[Globals.wave-1] - snapped(game_duration, 0.1))
 		if len(gamedurlabeltext.split(".")[1]) == 0:
 			gamedurlabeltext = gamedurlabeltext + "0"

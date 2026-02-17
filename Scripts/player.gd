@@ -3,7 +3,7 @@ extends CharacterBody2D
 var speed = Globals.player_speed
 var shiftingenergy = 100
 var coins = 0
-var health = 3
+var health = Globals.max_hp
 
 var gameover = false
 
@@ -34,7 +34,7 @@ func _process(delta: float) -> void:
 	else:
 		get_parent().get_node("CanvasLayer/ShiftingEnergyBar").visible = true
 
-func _on_hitbox_body_entered(body: Node2D) -> void:
+func hurt():
 	health -= 1
 	
 	if health <= 0:
@@ -65,3 +65,6 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 		get_tree().change_scene_to_file("res://Scenes/GameOver.tscn")
 	else:
 		get_parent().get_node("Camera2D").add_trauma(0.3)
+
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	hurt()
